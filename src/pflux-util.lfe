@@ -14,9 +14,14 @@
     ip
     "|head -2|tail -1|awk '{print $7}'|awk -F= '{print $2}'"))
 
-(defun ping (ip)
+(defun drop-last (list-data)
   (lists:reverse
     (cdr
-      (lists:reverse
-        (os:cmd (ping-command ip))))))
+      (lists:reverse list-data))))
 
+(defun ping (ip)
+  (pflux-util:drop-last
+    (os:cmd (pflux-util:ping-command ip))))
+
+(defun ping-all (ips)
+  (lists:map #'ping/1 ips))

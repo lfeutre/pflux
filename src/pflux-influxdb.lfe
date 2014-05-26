@@ -1,10 +1,14 @@
 (defmodule pflux-influxdb
   (export all))
 
+;; XXX update export function to only export the functions that are used
+;; in pflux.lfe
+
 (defun make-ping-payload (ip latency)
-  (++ "[{\"name\": \"" (pflux-config:get-stats-table) "\","
-         "\"columns\": [\"ip\",\"latency\"],"
-         "\"points\": [[\"" ip "\", \"" latency "\"]]}]"))
+  (let ((network (get-network ip)))
+    (++ "[{\"name\": \"" (pflux-config:get-stats-table) "\","
+          "\"columns\": [\"ip\",\"networks\",\"latency\"],"
+          "\"points\": [[\"" ip "\", \"" network "\", \"" latency "\"]]}]")))
 
 (defun store-ping (ip)
   (let* ((path (pflux-config:get-post-url))
@@ -15,10 +19,14 @@
                 (pflux-config:get-headers)
                 "application/json"
                 data))
-         (resp (httpc:request 'post req '() '())))
+         ((= (tuple 'ok (tuple status headers data)) resp)
+          (httpc:request 'post req '() '())))
     ; XXX debug
-    ;(io:format "data: ~p~n" (list data))
-    ;resp))
+    ; (io:format (++ "request: ~p~n"
+    ;                "response: ~p~n"
+    ;                "status: ~p~n"
+    ;                "headers: ~p~n"
+    ;                "data: ~p~n") (list req resp status headers data))
     (element 1 resp)))
 
 (defun store-pings ()
@@ -96,19 +104,33 @@
 (defun get-networks ()
   (filter-server-data "network" (get-servers)))
 
-(defun get-server-data (ip)
-  (lists:flatten
-    (lists:map
-      (lambda (x) x)
-      (pflux-config:servers))))
+(defun get-server (ip)
+  (let* ((query (++ "select * from servers where ip ='"ip "'"))
+         (path (pflux-config:get-get-url query))
+         (req (tuple
+                (++ (pflux-config:get-base-url) path)
+                (pflux-config:get-headers)))
+         ((= (tuple 'ok (tuple status headers data)) resp)
+          (httpc:request 'get req '() '()))
+         (all-bin-data (car (jsx:decode (list_to_binary data))))
+         (cols (ej:get #("columns") all-bin-data))
+         (points (ej:get #("points") all-bin-data)))
+    ; XXX debug
+    ; (io:format (++ "request: ~p~n"
+    ;                "response: ~p~n"
+    ;                "status: ~p~n"
+    ;                "headers: ~p~n"
+    ;                "data: ~p~n") (list req resp status headers data))
+    (car
+      (lists:map
+        (lambda (x) (lists:zip cols x))
+        points))))
 
-(defun get-server-name (ip)
-  (let (((list (tuple 'name name _ _)) (get-server-data ip)))
-    name))
+(defun get-network (ip)
+  (find-value "network" (get-server ip)))
 
-(defun get-server-network (ip)
-  (let (((list (tuple _ _ 'network network)) (get-server-data ip)))
-    network))
+(defun get-name (ip)
+  (find-value "name" (get-server ip)))
 
 (defun drop-servers ()
   (let* ((query "drop series servers")
