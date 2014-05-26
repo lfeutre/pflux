@@ -1,7 +1,7 @@
 (defmodule pflux
   (export all))
 
-(defun make-payload (name server network latency)
+(defun make-ping-payload (name server network latency)
   (++ "[{\"name\": \"ping-times\","
          "\"columns\": [\"name\",\"server\",\"networks\",\"latency\"],"
          "\"points\": [[\"" name "\", \"" server "\", \"" network "\", \"" latency "\"]]}]"))
@@ -14,7 +14,7 @@
          (latency (pflux-util:ping ip))
          (name (pflux-util:get-server-name ip))
          (network (pflux-util:get-server-network ip))
-         (data (make-payload name ip network latency))
+         (data (make-ping-payload name ip network latency))
          (req (tuple
                 (++ (pflux-config:get-base-url) path)
                 (pflux-config:get-headers)
