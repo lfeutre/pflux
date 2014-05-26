@@ -41,6 +41,7 @@ clean-eunit:
 compile: get-deps clean-ebin
 	@echo "Compiling project code and dependencies ..."
 	@which rebar.cmd >/dev/null 2>&1 && rebar.cmd compile || rebar compile
+	@cd deps/jiffy && rebar compile
 
 compile-no-deps: clean-ebin
 	@echo "Compiling only project code ..."
