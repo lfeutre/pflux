@@ -1,13 +1,19 @@
 (defmodule pflux-app
   (behaviour application)
-  (export (start 0)
+  (export (load 0)
+          (start 0)
           (start 2)
           (stop 1)))
+
+(defun load ()
+  (application:load (pflux-config:app-name)))
 
 (defun start ()
   (start '() '()))
 
 (defun start (type args)
+  (inets:start)
+  (ssl:start)
   (let ((result (: pflux-sup start_link)))
     (case result
       ((tuple 'ok pid)
