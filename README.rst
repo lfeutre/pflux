@@ -2,6 +2,8 @@
 pflux
 #####
 
+.. image:: resources/images/pflux-small.png
+
 **A simple host-monitoring tool written in LFE**
 
 
