@@ -65,6 +65,13 @@
 ;; @end
 ;;--------------------------------------------------------------------
 (defun init (args)
+  (pflux-app:load)
+  (pflux:store-pings)
+  (timer:apply_interval
+    (pflux-config:get-ping-interval)
+    'pflux
+    'store-pings
+    '())
   (tuple 'ok (make-state)))
 
 
