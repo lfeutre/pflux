@@ -138,7 +138,8 @@ app in the background by doing the following:
 
 ### YAWS
 
-TBD
+You shouldn't need to change anything here. Just start it up in a separate
+terminal window with ``make dev``.
 
 
 ### Grafana
@@ -146,8 +147,10 @@ TBD
 * Open [http://localhost:8080/dashboard/](http://localhost:8080/dashboard/)
   in your browser.
 
-* 
-
+* Get a quick start by copying
+  <a href="https://gist.github.com/anonymous/0114d215a91ddfd7f76f">this
+  URL</a> and pasting it in the Github gist URL when you click on the folder
+  ("search") icon and then the "Import" link.
 
 
 ## Usage
