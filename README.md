@@ -40,6 +40,7 @@ hosts):
 
 <a href="resources/images/Screenshot-2014-05-26-16.59.42.png"><img src="resources/images/Screenshot-2014-05-26-16.59.42-small.png" /></a>
 
+<a href="resources/images/Screenshot-2014-05-26-23.03.59.png"><img src="resources/images/Screenshot-2014-05-26-23.03.59-small.png" /></a>
 
 ## Configuration
 
@@ -145,7 +146,7 @@ TBD
 * Open [http://localhost:8080/dashboard/](http://localhost:8080/dashboard/)
   in your browser.
 
-*
+* 
 
 
 
