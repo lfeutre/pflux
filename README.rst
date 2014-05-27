@@ -31,6 +31,13 @@ somwhere in your ``$PATH``.
 pflux installs LFE/Erlang dependencies automatically when you compile.
 Non-LFE/Erlang dependencies have separate instructions below.
 
+Screenshots
+-----------
+
+Here are some views of some ping results (3 network classifications, 8
+hosts):
+
+<a href="resources/images/Screenshot-2014-05-26-16.58.31.png"><img src="resources/images/Screenshot-2014-05-26-16.58.31-small.png" /></a>
 
 Configuration
 =============
