@@ -192,4 +192,4 @@ instructions on running in debug mode or as a daemon.
 TBD
 
 (There's a make target for this, but the pinger currently only executes once. See
-ticket #10.)
+ticket #10 for more info/current status.)
