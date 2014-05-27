@@ -7,11 +7,12 @@
 
 ## Introduction
 
-pflux is built with LFE, `InfluxDB`_, `Grafana`_, and `YAWS`_.
-
+pflux is built with [LFE](https://github.com/rvirding/lfe),
+[InfluxDB](http://influxdb.com/download/),
+[Grafana](http://grafana.org/), and [YAWS](http://yaws.hyber.org/).
 
 As for the name, Clojure nabbed the obvious choice for an InfluxDB
-client: `Capacitor`_.
+client: [Capacitor](https://github.com/olauzon/capacitor).
 Naturally, quantum mechanics was the next thought, which lead to the
 inexorable "probability flux" (easier to type "pflux"), a term which denotes
 the probability per unit time per unit area.
@@ -21,8 +22,9 @@ There you have it.
 
 ### Dependencies
 
-This project assumes that you have `rebar`_  and `lfetool`_ installed
-somwhere in your ``$PATH``.
+This project assumes that you have [rebar](https://github.com/rebar/rebar)
+and [lfetool](https://github.com/lfe/lfetool) installed somwhere in your
+``$PATH``.
 
 pflux installs LFE/Erlang dependencies automatically when you compile.
 Non-LFE/Erlang dependencies have separate instructions below.
@@ -43,9 +45,9 @@ hosts):
 
 ### ElasticSearch
 
-* Send a ``PUT`` to http://localhost:9200/ping-stats
+* Send a ``PUT`` to [http://localhost:9200/ping-stats](http://localhost:9200/ping-stats)
 
-* Send a ``PUT`` to http://localhost:9200/ping-stats/ping-stat/_mapping
+* Send a ``PUT`` to [http://localhost:9200/ping-stats/ping-stat/_mapping](http://localhost:9200/ping-stats/ping-stat/_mapping)
   with the following data in the body:
 
 ```json
@@ -61,10 +63,12 @@ hosts):
 
 ### InfluxDB
 
-* Download and install `InfluxDB`_, following the `instructions`_.
+* Download and install [InfluxDB](http://influxdb.com/download/), following
+  the
+  [instructions](http://influxdb.com/docs/v0.7/introduction/installation.html).
 
-* Load http://localhost:8083/ in your browser, connect using the default
-  username and password (root/root) on port 8086.
+* Load [http://localhost:8083/](http://localhost:8083/) in your browser,
+  connect using the default username and password (root/root) on port 8086.
 
 * In the field under "Create Database" type "ping-stats" and then click
   "Create".
@@ -117,7 +121,8 @@ TBD
 
 ### Grafana
 
-* Open http://localhost:8080/dashboard/ in your browser.
+* Open [http://localhost:8080/dashboard/](http://localhost:8080/dashboard/)
+  in your browser.
 
 *
 
@@ -143,15 +148,3 @@ In particular, the data we are posting is this:
    > (slurp "src/pflux.lfe")
    #(ok pflux)
 ```
-
-.. Links
-.. -----
-.. _rebar: https://github.com/rebar/rebar
-.. _lfetool: https://github.com/lfe/lfetool
-.. _LFE: https://github.com/rvirding/lfe
-.. _lfeunit: https://github.com/lfe/lfeunit
-.. _Capacitor: https://github.com/olauzon/capacitor
-.. _InfluxDB: http://influxdb.com/download/
-.. _Grafana: http://grafana.org/
-.. _YAWS: http://yaws.hyber.org/
-.. _instructions: http://influxdb.com/docs/v0.7/introduction/installation.html
