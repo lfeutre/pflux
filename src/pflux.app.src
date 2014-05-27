@@ -46,6 +46,10 @@
           {'db-pass', "root"},
           {'stats-table', "ping-times"},
           {'servers-table', "servers"},
-          {'ping-interval', 10000} %% milliseconds
+          %% legal ping types include:
+          %%  * quick-ping
+          %%  * average-ping
+          {'ping-type', 'average-ping'},
+          {'ping-interval', 20000} %% milliseconds
           ]}
   ]}.

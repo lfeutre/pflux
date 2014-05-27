@@ -49,6 +49,9 @@
 (defun get-servers-table ()
   (load-config 'servers-table))
 
+(defun get-ping-type ()
+  (load-config 'ping-type))
+
 (defun get-ping-interval ()
   (load-config 'ping-interval))
 
