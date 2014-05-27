@@ -24,10 +24,25 @@ There you have it.
 
 This project assumes that you have [rebar](https://github.com/rebar/rebar)
 and [lfetool](https://github.com/lfe/lfetool) installed somwhere in your
-``$PATH``.
+``$PATH``. If you're doing regular LFE development, you'll want to have 
+these anyway :-)
+
+Get the code:
+
+```bash
+    $ git clone git@github.com:lfe/pflux.git
+    $ cd pflux
+```
 
 pflux installs LFE/Erlang dependencies automatically when you compile.
 Non-LFE/Erlang dependencies have separate instructions below.
+
+If you would prefer, you can download all the dependencies explicitly
+with the following command:
+
+```bash
+  $ make get-deps
+```
 
 
 ### Screenshots
