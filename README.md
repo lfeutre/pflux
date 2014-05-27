@@ -76,16 +76,21 @@ hosts):
 
 ### pflux
 
+If you have changed the InfluxDB username or password, you'll need to update
+your pflux configuration data in the ``env`` section of the
+``src/pflux.app.src`` file.
+
+Once you've got your config all set, build pflux:
+
 * ``make compile``
 * ``make dev``
 
-You'll need to set up your servers as well:
+You'll need to set up your servers as well. You can do this easily by
+starting up the LFE REPL:
 
 ```cl
 
-    $ make shell
-    > (pflux-app:start)
-    #(ok <0.32.0>)
+    $ make shell-no-deps
     > (pflux-app:load)
     ok
     > (pflux:store-server "google-dns" "8.8.8.8" "external")
@@ -100,17 +105,33 @@ Quick sanity check:
 
 ```cl
 
-    > (get-ips)
+    > (pflux:get-ips)
     ("192.168.1.1" "192.168.1.1" "8.8.8.8")
 ```
 
-Once your servers are set up, the application will start pinging them immediately. If you load up your local InfluxDB in a browser, you can
+Once your servers are set up, you're ready to start the app:
+
+```cl
+    > (pflux-app:start)
+    #(ok <0.62.0>)
+```
+
+Once started, the application will immediately begin pinging the servers
+you added. If you load up your local InfluxDB in a browser, you can
 execute the following query to see that the monitoring data is indeed
 showing up:
 
 ```sql
 
     select * from ping-times
+```
+
+Quitting the shell will stop the application, since it was started via
+a manual command in the REPL. After leaving the shell, you can run the pflex
+app in the background by doing the following:
+
+```bash
+
 ```
 
 
