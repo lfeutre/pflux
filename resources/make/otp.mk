@@ -1,22 +1,25 @@
-include common.mk
+LFE_PATH=$(SCRIPT_PATH):./deps/lfe/bin
+ERL_LIBS=$(shell lfetool info erllibs)
 
-dev:
+pflux-dev:
 	@echo "Running OTP app in the foreground ..."
-	@ERL_LIBS=$(ERL_LIBS) $(LFE) -eval "application:start('pflux')" \
-	-noshell
+	@ERL_LIBS=$(ERL_LIBS) PATH=$(LFE_PATH) lfe \
+	-eval "'pflux-app':start()" -noshell
 
-run: dev
+pflux-run: pflux-dev
 
-prod:
+pflux-prod:
 	@echo "Running OTP app in the background ..."
-	@ERL_LIBS=$(ERL_LIBS) $(LFE) -eval "application:start('pflux')" \
+	@ERL_LIBS=$(ERL_LIBS) PATH=$(LFE_PATH) lfe \
+	-eval "'pflux-app':start()" \
 	-name pflux@$${HOSTNAME} -setcookie `cat ~/.erlang.cookie` \
 	-noshell -detached
 
-daemon: prod
+pflux-daemon: pflux-prod
 
-stop:
-	@ERL_LIBS=$(ERL_LIBS) $(LFE) \
+
+pflux-stop:
+	@ERL_LIBS=$(ERL_LIBS) PATH=$(LFE_PATH) lfe \
 	-eval "rpc:call('pflux@$${HOSTNAME}', init, stop, [])" \
 	-name controller@$${HOSTNAME} -setcookie `cat ~/.erlang.cookie` \
 	-noshell -s erlang halt
