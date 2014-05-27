@@ -155,21 +155,10 @@ terminal window with ``make dev``.
 
 ## Usage
 
-This is being used to post data from an LFE application to an InfluxDB
-instance which is saving monitoring data. As such, the client is pretty bare
-right now. We just need to post some JSON data.
+pflux is really used through the browser. In particular, the Grafana JS application
+is responsible for presenting the data collected by the LFE OTP application.
 
-In particular, the data we are posting is this:
-
-```js
-
-    {"name": "<human-readable-name>",
-     "server": "<hostname-or-ip>",
-     "network": "<network-description>"
-     "latency": <float-milliseconds>}
-```
-
-```cl
-   > (slurp "src/pflux.lfe")
-   #(ok pflux)
-```
+The docs for Grafana + InfluxDB aren't the best, but we were able to poke arlound
+for a while and get to know it without them. Some things aren't terribly intuitive
+(e.g., you need to single quote entires in the graph filters), but once you get
+used to it, things start to click and the absense of docs doesn't seem so bad.
