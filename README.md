@@ -52,7 +52,6 @@ hosts):
 
     {"ping-stat": {
        "properties": {
-         "name": {"type": "string"},
          "ip": {"type": "string"},
          "network": {"type": "string"},
          "latency": {"type": "float"}
