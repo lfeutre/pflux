@@ -50,6 +50,11 @@
           %%  * quick-ping
           %%  * average-ping
           {'ping-type', 'average-ping'},
-          {'ping-interval', 20000} %% milliseconds
+          %% legal ping interval types include:
+          %%  * "normal"
+          %%  * "random"
+          {'ping-interval-type', "random"},
+          {'ping-interval', 20000}, %% milliseconds
+          {'ping-interval-range', [10000,30000]} %% milliseconds
           ]}
   ]}.

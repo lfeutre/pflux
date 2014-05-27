@@ -18,7 +18,7 @@
 (defun average-ping (ip)
   "This gets the longest ping time of three."
   (++
-    "ping -Qnc 3"
+    "ping -Qnc 3 "
     ip
     "|tail -1|awk -F= '{print $2}'|awk -F/ '{print $3}'"))
 
@@ -28,12 +28,19 @@
       (lists:reverse list-data))))
 
 (defun ping (ip)
-  (pflux-util:drop-last
-    (os:cmd
-      (call
-        'pflux-util
-        (pflux-config:get-ping-type)
-        ip))))
+  "Convert to a float and multiply by 1000 for microseconds."
+  (erlang:round (* (list_to_float
+                  (pflux-util:drop-last
+                    (os:cmd
+                      (call
+                        'pflux-util
+                        (pflux-config:get-ping-type)
+                        ip)))) 1000)))
 
 (defun ping-all (ips)
   (lists:map #'ping/1 ips))
+
+(defun get-random-interval
+  (((cons start (cons stop _)))
+   (let ((adjusted-end (- stop start)))
+     (+ start (random:uniform adjusted-end)))))

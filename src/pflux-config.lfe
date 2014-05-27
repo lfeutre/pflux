@@ -52,8 +52,18 @@
 (defun get-ping-type ()
   (load-config 'ping-type))
 
+(defun get-ping-interval-type ()
+  (load-config 'ping-interval-type))
+
+(defun get-ping-interval-range ()
+  (load-config 'ping-interval-range))
+
 (defun get-ping-interval ()
-  (load-config 'ping-interval))
+  (case (get-ping-interval-type)
+    ("normal"
+      (load-config 'ping-interval))
+    ("random"
+      (pflux-util:get-random-interval (get-ping-interval-range)))))
 
 (defun get-post-url ()
   (++ "/db/" (get-db)
