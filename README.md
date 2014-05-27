@@ -34,6 +34,11 @@ hosts):
 
 <a href="resources/images/Screenshot-2014-05-26-16.58.31.png"><img src="resources/images/Screenshot-2014-05-26-16.58.31-small.png" /></a>
 
+<a href="resources/images/Screenshot-2014-05-26-16.59.04.png"><img src="resources/images/Screenshot-2014-05-26-16.59.04-small.png" /></a>
+
+<a href="resources/images/Screenshot-2014-05-26-16.59.42.png"><img src="resources/images/Screenshot-2014-05-26-16.59.42-small.png" /></a>
+
+
 ## Configuration
 
 ### ElasticSearch
