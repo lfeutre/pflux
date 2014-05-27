@@ -55,6 +55,6 @@
           %%  * "random"
           {'ping-interval-type', "random"},
           {'ping-interval', 20000}, %% milliseconds
-          {'ping-interval-range', [10000,30000]} %% milliseconds
+          {'ping-interval-range', [15000,35000]} %% milliseconds
           ]}
   ]}.

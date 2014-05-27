@@ -5,11 +5,13 @@
 ;; in pflux.lfe
 
 (defun make-ping-payload (ip int-latency)
-  (let ((network (get-network ip))
+  (let ((group (get-group ip))
+        (network (get-network ip))
         (latency (integer_to_list int-latency)))
     (++ "[{\"name\": \"" (pflux-config:get-stats-table) "\","
-          "\"columns\": [\"ip\",\"networks\",\"latency\"],"
-          "\"points\": [[\"" ip "\", \"" network "\", " latency "]]}]")))
+          "\"columns\": [\"ip\",\"group\",\"network\",\"latency\"],"
+          "\"points\": [[\"" ip "\", \"" group "\", \"" network
+                         "\", " latency "]]}]")))
 
 (defun store-ping (ip)
   (let* ((path (pflux-config:get-post-url))
@@ -33,14 +35,15 @@
 (defun store-pings ()
   (lists:map #'store-ping/1 (get-ips)))
 
-(defun make-server-payload (name ip network)
+(defun make-server-payload (name ip group network)
   (++ "[{\"name\": \"" (pflux-config:get-servers-table) "\","
-         "\"columns\": [\"name\",\"ip\",\"network\"],"
-         "\"points\": [[\"" name "\", \"" ip "\", \"" network "\"]]}]"))
+         "\"columns\": [\"name\",\"ip\",\"group\",\"network\"],"
+         "\"points\": [[\"" name "\", \"" ip "\", \"" group
+                        "\", \"" network "\"]]}]"))
 
-(defun store-server (name ip network)
+(defun store-server (name ip group network)
   (let* ((path (pflux-config:get-post-url))
-         (data (make-server-payload name ip network))
+         (data (make-server-payload name ip group network))
          (req (tuple
                 (++ (pflux-config:get-base-url) path)
                 (pflux-config:get-headers)
@@ -102,6 +105,9 @@
 (defun get-names ()
   (filter-server-data "name" (get-servers)))
 
+(defun get-groups ()
+  (filter-server-data "group" (get-servers)))
+
 (defun get-networks ()
   (filter-server-data "network" (get-servers)))
 
@@ -126,6 +132,9 @@
       (lists:map
         (lambda (x) (lists:zip cols x))
         points))))
+
+(defun get-group (ip)
+  (find-value "group" (get-server ip)))
 
 (defun get-network (ip)
   (find-value "network" (get-server ip)))

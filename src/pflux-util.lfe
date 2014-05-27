@@ -22,20 +22,26 @@
     ip
     "|tail -1|awk -F= '{print $2}'|awk -F/ '{print $3}'"))
 
-(defun drop-last (list-data)
-  (lists:reverse
-    (cdr
-      (lists:reverse list-data))))
+(defun swap-last (list-data)
+  (let ((trimmed-data (lists:reverse
+                        (cdr
+                          (lists:reverse list-data)))))
+    (case (length trimmed-data)
+      (0 "0.0")
+      (_ (++ trimmed-data "0")))))
+
+(defun raw-ping (ip)
+  (os:cmd
+    (call
+      'pflux-util
+      (pflux-config:get-ping-type)
+      ip)))
 
 (defun ping (ip)
   "Convert to a float and multiply by 1000 for microseconds."
   (erlang:round (* (list_to_float
-                  (pflux-util:drop-last
-                    (os:cmd
-                      (call
-                        'pflux-util
-                        (pflux-config:get-ping-type)
-                        ip)))) 1000)))
+                     (swap-last (raw-ping ip)))
+                   1000)))
 
 (defun ping-all (ips)
   (lists:map #'ping/1 ips))

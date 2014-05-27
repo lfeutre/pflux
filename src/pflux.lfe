@@ -12,8 +12,11 @@
                ,@args)))
 
 ;;; Data calls.
-(defun store-server (name ip network)
-  (call-backend `'store-server (list name ip network)))
+(defun store-server (name ip group network)
+  (call-backend `'store-server (list name ip group network)))
+
+(defun get-servers ()
+  (call-backend 'get-servers))
 
 (defun get-ips ()
   (call-backend 'get-ips))
