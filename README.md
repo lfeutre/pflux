@@ -41,7 +41,7 @@ If you would prefer, you can download all the dependencies explicitly
 with the following command:
 
 ```bash
-  $ make get-deps
+    $ make get-deps
 ```
 
 
