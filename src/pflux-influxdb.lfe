@@ -4,11 +4,12 @@
 ;; XXX update export function to only export the functions that are used
 ;; in pflux.lfe
 
-(defun make-ping-payload (ip latency)
-  (let ((network (get-network ip)))
+(defun make-ping-payload (ip int-latency)
+  (let ((network (get-network ip))
+        (latency (integer_to_list int-latency)))
     (++ "[{\"name\": \"" (pflux-config:get-stats-table) "\","
           "\"columns\": [\"ip\",\"networks\",\"latency\"],"
-          "\"points\": [[\"" ip "\", \"" network "\", \"" latency "\"]]}]")))
+          "\"points\": [[\"" ip "\", \"" network "\", " latency "]]}]")))
 
 (defun store-ping (ip)
   (let* ((path (pflux-config:get-post-url))
