@@ -40,7 +40,7 @@
   %% on the command line. can be fetched with application:get_env
   {env, [
           %% right now the only supported backend is influxdb
-          {'backend', influxdb},
+          {'db-backend', influxdb},
           {'db', "ping-stats"},
           {'db-user', "root"},
           {'db-pass', "root"},

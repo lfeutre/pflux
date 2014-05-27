@@ -3,11 +3,11 @@
 
 ;;; Infrastructure functions.
 (defun call-backend (func)
-  (call (lfe-utils:atom-cat 'pflux- (pflux-config:get-backend))
+  (call (lfe-utils:atom-cat 'pflux- (pflux-config:get-db-backend))
         func))
 
 (defun call-backend (func args)
-  (eval `(call ',(lfe-utils:atom-cat 'pflux- (pflux-config:get-backend))
+  (eval `(call ',(lfe-utils:atom-cat 'pflux- (pflux-config:get-db-backend))
                ,func
                ,@args)))
 
