@@ -63,6 +63,9 @@ hosts):
          }}}
 ```
 
+Both of these are done very easily with the [Postman](http://www.getpostman.com/) browser
+plugin for making calls to RESTful services.
+
 
 ### InfluxDB
 
