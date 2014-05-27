@@ -3,7 +3,7 @@
 
 (defun project-name () "" "p-flux")
 (defun app-name () "" 'pflux)
-(defun project-desc () "" "An LFE Client for InfluxDB")
+(defun project-desc () "" "A simple host-monitoring tool written in LFE")
 (defun project-url () "" "https://github.com/lfe/pflux")
 (defun get-base-url () "" "http://localhost:8086")
 

@@ -2,7 +2,7 @@
 {application, 'pflux',
  [
   %% A quick description of the application.
-  {description, "My project description..."},
+  {description, "A simple host-monitoring tool written in LFE."},
 
   %% The version of the application
   {vsn, "0.0.1"},
