@@ -155,6 +155,12 @@ terminal window with ``make dev``.
 
 ### Grafana
 
+* Copy the file ``resources/public/grafana-1.5.4/pflux-sample-config.js`` to
+  ``resources/public/grafana-1.5.4/config.js`` and edit the ElasticSearch and
+  InfluxDB sections so that the hosts match yours. If you're just loading the
+  dashboard in a browser on the same host as pflux, you shouldn't need to make
+  any changes.
+
 * Open [http://localhost:8080/dashboard/](http://localhost:8080/dashboard/)
   in your browser.
 

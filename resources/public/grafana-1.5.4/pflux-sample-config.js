@@ -13,8 +13,7 @@ function (Settings) {
      * elasticsearch url:
      * For Basic authentication use: http://username:password@domain.com:9200
      */
-    //elasticsearch: "http://"+window.location.hostname+":9200",
-    elasticsearch: "http://10.0.4.64:9200",
+    elasticsearch: "http://"+window.location.hostname+":9200",
 
     /**
      * graphite-web url:
@@ -27,8 +26,7 @@ function (Settings) {
       influx: {
         default: true,
         type: 'influxdb',
-        //url: 'http://localhost:8086/db/ping-stats',
-        url: 'http://10.0.4.64:8086/db/ping-stats',
+        url: 'http://localhost:8086/db/ping-stats',
         username: 'root',
         password: 'root',
       }
