@@ -24,7 +24,7 @@ There you have it.
 
 This project assumes that you have [rebar](https://github.com/rebar/rebar)
 and [lfetool](https://github.com/lfe/lfetool) installed somwhere in your
-``$PATH``. If you're doing regular LFE development, you'll want to have 
+``$PATH``. If you're doing regular LFE development, you'll want to have
 these anyway :-)
 
 Get the code:
@@ -132,7 +132,7 @@ columns in InfluxDB:
  * ``group``
  * ``network``
 
-Admittedly the last two are named poorly (and evolved over the course of learning Grafana). 
+Admittedly the last two are named poorly (and evolved over the course of learning Grafana).
 The intent behind these was to provide several means of portraying different levels
 of granularity for server response times.You may, of course, use them however you wish :-)
 
