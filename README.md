@@ -34,13 +34,13 @@ Non-LFE/Erlang dependencies have separate instructions below.
 Here are some views of some ping results (3 network classifications, 8
 hosts):
 
-<a href="resources/images/Screenshot-2014-05-26-16.58.31.png"><img src="resources/images/Screenshot-2014-05-26-16.58.31-small.png" /></a>
-
-<a href="resources/images/Screenshot-2014-05-26-16.59.04.png"><img src="resources/images/Screenshot-2014-05-26-16.59.04-small.png" /></a>
-
-<a href="resources/images/Screenshot-2014-05-26-16.59.42.png"><img src="resources/images/Screenshot-2014-05-26-16.59.42-small.png" /></a>
-
 <a href="resources/images/Screenshot-2014-05-26-23.03.59.png"><img src="resources/images/Screenshot-2014-05-26-23.03.59-small.png" /></a>
+
+<a href="resources/images/Screenshot-2014-05-28-06.40.08.png"><img src="resources/images/Screenshot-2014-05-28-06.40.08-small.png" /></a>
+
+<a href="resources/images/Screenshot-2014-05-28-06.39.15.png"><img src="resources/images/Screenshot-2014-05-28-06.39.15-small.png" /></a>
+
+
 
 ## Configuration
 
