@@ -2,7 +2,7 @@
 
 <img src="resources/images/pflux-small.png"/>
 
-**A simple host-monitoring tool written in LFE**
+*A simple host-monitoring tool written in LFE*
 
 
 ## Introduction
@@ -24,10 +24,26 @@ There you have it.
 
 This project assumes that you have [rebar](https://github.com/rebar/rebar)
 and [lfetool](https://github.com/lfe/lfetool) installed somwhere in your
-``$PATH``.
+``$PATH``. If you're doing regular LFE development, you'll want to have 
+these anyway :-)
+
+Get the code:
+
+```bash
+    $ git clone git@github.com:lfe/pflux.git
+    $ cd pflux
+```
 
 pflux installs LFE/Erlang dependencies automatically when you compile.
 Non-LFE/Erlang dependencies have separate instructions below.
+
+If you would prefer, you can download all the dependencies explicitly
+with the following command:
+
+```bash
+    $ make get-deps
+```
+
 
 ### Screenshots
 
@@ -39,6 +55,7 @@ hosts):
 <a href="resources/images/Screenshot-2014-05-28-06.40.08.png"><img src="resources/images/Screenshot-2014-05-28-06.40.08-small.png" /></a>
 
 <a href="resources/images/Screenshot-2014-05-28-06.39.15.png"><img src="resources/images/Screenshot-2014-05-28-06.39.15-small.png" /></a>
+
 
 
 
@@ -60,6 +77,9 @@ hosts):
          "latency": {"type": "float"}
          }}}
 ```
+
+Both of these are done very easily with the [Postman](http://www.getpostman.com/) browser
+plugin for making calls to RESTful services.
 
 
 ### InfluxDB
@@ -84,25 +104,39 @@ your pflux configuration data in the ``env`` section of the
 Once you've got your config all set, build pflux:
 
 * ``make compile``
-* ``make dev``
 
 You'll need to set up your servers as well. You can do this easily by
 starting up the LFE REPL:
 
-```cl
-
+```bash
     $ make shell-no-deps
+```
+
+Once there, you can create servers like so:
+
+```cl
     > (pflux-app:load)
     ok
-    > (pflux:store-server "google-dns" "8.8.8.8" "external")
+    > (pflux:store-server "google-dns" "8.8.8.8" "external" "google")
     ok
-    > (pflux:store-server "router" "192.168.1.1" "wired")
+    > (pflux:store-server "router" "192.168.1.1" "wired" "internal")
     ok
-    > (pflux:store-server "wifi-ap" "192.168.1.1" "wireless")
+    > (pflux:store-server "wifi-ap" "192.168.1.1" "wireless" "internal")
     ok
 ```
 
-Quick sanity check:
+The parameters passed to ``store-server`` map, in order, to the following
+columns in InfluxDB:
+ * ``name``
+ * ``ip``
+ * ``group``
+ * ``network``
+
+Admittedly the last two are named poorly (and evolved over the course of learning Grafana). 
+The intent behind these was to provide several means of portraying different levels
+of granularity for server response times.You may, of course, use them however you wish :-)
+
+With the servers created, let's do a quick sanity check:
 
 ```cl
 
@@ -110,31 +144,8 @@ Quick sanity check:
     ("192.168.1.1" "192.168.1.1" "8.8.8.8")
 ```
 
-Once your servers are set up, you're ready to start the app:
-
-```cl
-    > (pflux-app:start)
-    #(ok <0.62.0>)
-```
-
-Once started, the application will immediately begin pinging the servers
-you added. If you load up your local InfluxDB in a browser, you can
-execute the following query to see that the monitoring data is indeed
-showing up:
-
-```sql
-
-    select * from ping-times
-```
-
-Quitting the shell will stop the application, since it was started via
-a manual command in the REPL. After leaving the shell, you can run the pflex
-app in the background by doing the following:
-
-```bash
-
-```
-
+Once your servers are set up, you're ready to start the app. See the "Usage" section
+below for instructions.
 
 ### YAWS
 
@@ -155,21 +166,48 @@ terminal window with ``make dev``.
 
 ## Usage
 
-This is being used to post data from an LFE application to an InfluxDB
-instance which is saving monitoring data. As such, the client is pretty bare
-right now. We just need to post some JSON data.
+pflux is really used through the browser. In particular, the Grafana JS application
+is responsible for presenting the data collected by the LFE OTP application.
 
-In particular, the data we are posting is this:
+The docs for Grafana + InfluxDB aren't the best, but we were able to poke arlound
+for a while and get to know it without them. Some things aren't terribly intuitive
+(e.g., you need to single quote entires in the graph filters), but once you get
+used to it, things start to click and the absense of docs doesn't seem so bad.
 
-```js
 
-    {"name": "<human-readable-name>",
-     "server": "<hostname-or-ip>",
-     "network": "<network-description>"
-     "latency": <float-milliseconds>}
+### Running
+
+#### From the REPL
+
+```bash
+    $ make shell-no-deps
 ```
+
+Then:
 
 ```cl
-   > (slurp "src/pflux.lfe")
-   #(ok pflux)
+    > (pflux-app:start)
+    #(ok <0.62.0>)
 ```
+
+Once started, the application will immediately begin pinging the servers
+you added. If you load up your local InfluxDB in a browser, you can
+execute the following query to see that the monitoring data is indeed
+showing up:
+
+```sql
+
+    select * from ping-times
+```
+
+Quitting the shell will stop the application, since it was started via
+a manual command in the REPL. See the section "From the Command Line" for
+instructions on running in debug mode or as a daemon.
+
+
+#### From the Command Line
+
+TBD
+
+(There's a make target for this, but the pinger currently only executes once. See
+[ticket #10](https://github.com/lfe/pflux/issues/10) for more info/current status.)
