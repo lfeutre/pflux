@@ -6,4 +6,4 @@ Expm.Package.new(
              "Grafana", "Graphite", "Stats", "Monitoring", "Network",
              "Networking", "Visualization"],
   maintainers: [[name: "Duncan McGreggor", email: "oubiwann@lfe.io"]],
-  repositories: [[github: "lfe/pflux"]])
+  repositories: [[github: "lfex/pflux"]])
