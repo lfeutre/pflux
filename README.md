@@ -1,4 +1,4 @@
-# pflux [![Build Status](https://travis-ci.org/lfe/pflux.png?branch=master)](https://travis-ci.org/lfe/pflux)
+# pflux [![Build Status](https://travis-ci.org/lfex/pflux.png?branch=master)](https://travis-ci.org/lfex/pflux)
 
 <img src="resources/images/pflux-small.png"/>
 
